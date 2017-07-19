@@ -21,8 +21,9 @@ class MainController: BaseViewController {
     var borderWidth:Float = 2.0
     let cash:Double? = nil
     var balance:String?
-    var accountFix = "201799990001030043"
+    var accountFix = "201799990001030042"
     var token: String?
+    var spendController: SpendCashController?
     
     var information:InformationUser!
     
@@ -78,7 +79,7 @@ class MainController: BaseViewController {
         balanceLabel.text = balance
         
         information = InformationUser()
-        information.balance = balance!
+        information.balance = ModelCart.getInstance().getModel().profileresponse.balance!
         information.account = accountFix
         information.token = self.token!
     }
@@ -100,14 +101,30 @@ class MainController: BaseViewController {
         statementTableView.separatorColor = UIColor(red: 240.0/255.0, green: 240.0/255.0, blue: 240.0/255.0, alpha: 0.8)
     }
     
+    @IBAction func pushSpendController(_ sender: UIButton) {
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        spendController = (storyBoard.instantiateViewController(withIdentifier: "SpendController") as! SpendCashController)
+        spendController?.isPayment = true
+        spendController?.information = information
+        
+        let backButton = UIBarButtonItem(image: UIImage(named:"back_screen"), style: .plain, target: self, action: #selector(backScreen))
+        
+        spendController?.navigationItem.leftBarButtonItem = backButton
+        spendController?.title = "จ่ายเงิน"
+        
+        self.show(spendController!, sender: nil)
+    }
+    
+    @objc func backScreen() {
+        print("back")
+        spendController?.navigationController?.popViewController(animated: true
+        )
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "receiveController" {
             let destinationController = segue.destination as! ReceiveCashController
             destinationController.information = information
-        }
-        
-        else if segue.identifier == "spendController" {
-            ModelCart.getInstance().getInformation = self.information
         }
     }
 }
@@ -153,10 +170,14 @@ extension MainController: UITableViewDelegate, UITableViewDataSource {
         cell.imgProfileDetail.layer.borderWidth = CGFloat(borderWidth)
         cell.imgProfileDetail.layer.borderColor = UIColor.white.cgColor
         
-        let firstName = ModelCart.getInstance().getModel().profileresponse.transaction?[indexPath.row].firstName
-        let lastName = ModelCart.getInstance().getModel().profileresponse.transaction?[indexPath.row].lastName
-        let screenName = "\(firstName!) \(lastName!)"
-        cell.nameDetailLabel.text = screenName
+        if let firstName = ModelCart.getInstance().getModel().profileresponse.transaction?[indexPath.row].firstName,
+            let lastName = ModelCart.getInstance().getModel().profileresponse.transaction?[indexPath.row].lastName {
+            
+            let screenName = "\(firstName) \(lastName)"
+            cell.nameDetailLabel.text = screenName
+        }else{
+            cell.nameDetailLabel.text = ModelCart.getInstance().getModel().profileresponse.transaction?[indexPath.row].firstName
+        }
         
         let dateAgo = ModelCart.getInstance().getModel().profileresponse.transaction?[indexPath.row].dateAgo
         cell.timeDetailLabel.text = dateAgo!

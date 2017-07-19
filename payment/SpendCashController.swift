@@ -24,45 +24,53 @@ class SpendCashController: BaseViewController {
     var qrCodeFrameView:UIView?
     var information: InformationUser?
     var photo = 0
-   
+    var isPayment:Bool?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "จ่ายเงิน"
-        
-        information = ModelCart.getInstance().getInformation
         balanceLabel.text = information?.balance
         
         createVideoCapture()
+        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         SwiftEventBus.unregister(self)
+        self.navigationController?.popToRootViewController(animated: false)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setEventBus()
     }
-    
-    @IBAction func closeSpendCash(_ sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)
-    }
-    
 }
 
 extension SpendCashController {
     func requestBuyer(qrcode: String) {
-        let splitStr = qrcode.components(separatedBy: ",")
-        
-        var parameter = [String: String]()
-        parameter["account_no"] = information?.account
-        parameter["amount"] = splitStr[0]
-        parameter["token"] = information?.token
-        parameter["transaction_ref"] = splitStr[1]
-        
-        showLoading()
-        ClientHttp.getInstance().payCash(parameter: parameter)
+        if isPayment! {
+            let splitStr:[String] = qrcode.components(separatedBy: ",")
+            var parameter = [String: String]()
+            parameter["account_no"] = information?.account
+            parameter["amount"] = splitStr[0]
+            parameter["token"] = information?.token
+            parameter["transaction_ref"] = splitStr[1]
+            
+            information?.amount = splitStr[0]
+            
+            showLoading()
+            ClientHttp.getInstance().payCash(parameter: parameter)
+            
+        }else{
+            var parameters = [String: String]()
+            parameters["account_no"] = qrcode
+            parameters["amount"] = information?.amount
+            parameters["token"] = information?.token
+            parameters["transaction_ref"] = information?.transactionRef
+            
+            showLoading()
+            ClientHttp.getInstance().payCash(parameter: parameters)
+        }
     }
     
     func setEventBus() {
@@ -70,11 +78,24 @@ extension SpendCashController {
             if let response = result.object as? BuyerResult {
                 if response.code == "SUCCESS" {
                     print(response.balanceDebit!)
+                    self.pushNewController(response.balanceDebit!)
                 }
             }
             
             self.hideLoading()
         }
+    }
+    
+    func pushNewController(_ debitBalance: String?){
+        let destinationController = storyboard?.instantiateViewController(withIdentifier: "ResultPayment") as! ResultPaymentViewController
+        destinationController.information = self.information
+        destinationController.isPay = self.isPayment
+        destinationController.debitBalance = debitBalance
+        
+        let nav = UINavigationController(rootViewController: destinationController)
+        nav.topViewController?.navigationItem.title = "Transaction"
+        
+        self.show(nav, sender: nil)
     }
 }
 
@@ -148,7 +169,7 @@ extension SpendCashController: AVCaptureMetadataOutputObjectsDelegate {
             
             if let qrcode = metadataObj.stringValue {
                 photo += 1
-                
+                print(qrcode)
                 if photo == 1 {
                     self.requestBuyer(qrcode: qrcode)
                 }

@@ -9,23 +9,26 @@
 import UIKit
 
 class GenerateQRCodeViewController: UIViewController {
+    
+    //Make: outlet
     @IBOutlet var balanceLabel: UILabel!
     @IBOutlet var timeLabel: UILabel!
     @IBOutlet var qrcodeImg: UIImageView!
     @IBOutlet var amountLabel: UILabel!
     
+    //Make: properties
     var image:CIImage!
-    
     var time:Int = 60
     var countDown = Timer()
+    var information: InformationUser?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "QR Code"
-        balanceLabel.text = ModelCart.getInstance().getInformation.balance
-        amountLabel.text = moneyFormatter().thaiFormatter(Double(ModelCart.getInstance().getInformation.amount)!)
+        balanceLabel.text = information?.balance
+        amountLabel.text = moneyFormatter().thaiFormatter(Double((information?.amount)!)!)
         
-        let qrcode = "\(ModelCart.getInstance().getInformation.amount),\(ModelCart.getInstance().getInformation.transactionRef)"
+        let qrcode = "\((information?.amount)!),\((information?.transactionRef)!)"
         let newImage:UIImage = generateQRCode(from: qrcode)!
         qrcodeImg.image = newImage
         

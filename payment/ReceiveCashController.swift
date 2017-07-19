@@ -87,8 +87,11 @@ class ReceiveCashController: BaseViewController, UIScrollViewDelegate {
     
     func doneClicked() {
         view.endEditing(true)
+        
         if let amount = receiveCashSlide[pageControl.currentPage].amountTextField.text{
-            requestTranRef(amount: amount)
+            if amount.characters.count > 0 {
+                requestTranRef(amount: amount)
+            }
         }
     }
     
@@ -115,12 +118,11 @@ class ReceiveCashController: BaseViewController, UIScrollViewDelegate {
 //Request
 extension ReceiveCashController {
     func requestTranRef(amount: String) {
-        ModelCart.getInstance().getInformation.balance = information.balance
-        ModelCart.getInstance().getInformation.amount = amount
+        information.amount = amount
         
         var parameters = [String:String]()
         parameters["account_no"] = information.account
-        parameters["amount"] = amount
+        parameters["amount"] = information.amount
         parameters["token"] = information.token
         
         showLoading()
@@ -134,7 +136,7 @@ extension ReceiveCashController {
         SwiftEventBus.onMainThread(self, name: "SellerResponse") { (result) in
             if let response = result.object as? SellerResult {
                 print(response.tranRef!)
-                ModelCart.getInstance().getInformation.transactionRef = response.tranRef!
+                self.information.transactionRef = response.tranRef!
                 
                 self.pushNewController()
             }
@@ -145,14 +147,23 @@ extension ReceiveCashController {
     
     func pushNewController() {
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-        let genQRController = storyBoard.instantiateViewController(withIdentifier: "GenerateQRCode") as! GenerateQRCodeViewController
-        let spendController = storyBoard.instantiateViewController(withIdentifier: "NavSpendController") as! NavSpendViewController
         
         if pageControl.currentPage == 0 {
+            let genQRController = storyBoard.instantiateViewController(withIdentifier: "GenerateQRCode") as! GenerateQRCodeViewController
+            genQRController.information = information
             navigationController?.pushViewController(genQRController, animated: true)
             navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         }else{
-            navigationController?.present(spendController, animated: true, completion: nil)
+            let spendController = storyBoard.instantiateViewController(withIdentifier: "SpendController") as! SpendCashController
+            spendController.information = information
+            spendController.isPayment = false
+            spendController.navigationItem.title = "Scan QR"
+            
+            self.show(spendController, sender: nil)
         }
+    }
+    
+    @objc func backScreen(){
+        
     }
 }
