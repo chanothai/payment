@@ -39,6 +39,22 @@ class ClientHttp {
         return me!
     }
     
+    func requestCode(){
+        let path: String? = "http://connect03.pakgon.com/Api/getGenCode.json"
+        guard let realUrl = URL(string: path!) else {
+            return
+        }
+        
+        Alamofire.request(realUrl, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).responseObject { (response: DataResponse<RegisterResponse>) in
+            guard let codeResponse = response.result.value else {
+                print(response.error!)
+                return
+            }
+            
+            SwiftEventBus.post("RegisterResponse", sender: codeResponse.result)
+        }
+    }
+    
     func requestToken(parameter: [String: String]) {
         let path: String? = "\(url!)\(PathURL.getToken)"
         print(path!)

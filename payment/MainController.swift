@@ -21,7 +21,7 @@ class MainController: BaseViewController {
     var borderWidth:Float = 2.0
     let cash:Double? = nil
     var balance:String?
-    var accountFix = "201799990001030042"
+    var accountFix = "201799990001030039"
     var token: String?
     var spendController: SpendCashController?
     
@@ -75,7 +75,12 @@ class MainController: BaseViewController {
     }
     
     func setBalance() {
-        balance = moneyFormatter().thaiFormatter(Double(ModelCart.getInstance().getModel().profileresponse.balance!)!)
+        if let resultBalance = ModelCart.getInstance().getModel().profileresponse.balance {
+            balance = resultBalance
+        }else{
+            balance = "0.00"
+        }
+        
         balanceLabel.text = balance
         
         information = InformationUser()

@@ -24,6 +24,8 @@
 		DE812E121F171F89005A43BC /* ClientHttp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE812E111F171F89005A43BC /* ClientHttp.swift */; };
 		DE812E151F172C79005A43BC /* AccountResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE812E141F172C79005A43BC /* AccountResponse.swift */; };
 		DE812E171F174CD3005A43BC /* ProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE812E161F174CD3005A43BC /* ProfileResponse.swift */; };
+		DE9498221F56C62F00888758 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9498211F56C62F00888758 /* RegisterViewController.swift */; };
+		DE9498251F56CA1D00888758 /* RegisterResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9498241F56CA1D00888758 /* RegisterResponse.swift */; };
 		DE9EAB521F1F542900627376 /* ResultPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9EAB511F1F542900627376 /* ResultPaymentViewController.swift */; };
 		DEA002461EADD8B00004AAF1 /* WalkthroughContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA002451EADD8B00004AAF1 /* WalkthroughContentViewController.swift */; };
 		DEA002481EADDB3B0004AAF1 /* WalkthroughPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA002471EADDB3B0004AAF1 /* WalkthroughPageViewController.swift */; };
@@ -57,6 +59,8 @@
 		DE812E111F171F89005A43BC /* ClientHttp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientHttp.swift; sourceTree = "<group>"; };
 		DE812E141F172C79005A43BC /* AccountResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountResponse.swift; sourceTree = "<group>"; };
 		DE812E161F174CD3005A43BC /* ProfileResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileResponse.swift; sourceTree = "<group>"; };
+		DE9498211F56C62F00888758 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		DE9498241F56CA1D00888758 /* RegisterResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterResponse.swift; sourceTree = "<group>"; };
 		DE9EAB511F1F542900627376 /* ResultPaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultPaymentViewController.swift; sourceTree = "<group>"; };
 		DEA002451EADD8B00004AAF1 /* WalkthroughContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalkthroughContentViewController.swift; sourceTree = "<group>"; };
 		DEA002471EADDB3B0004AAF1 /* WalkthroughPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalkthroughPageViewController.swift; sourceTree = "<group>"; };
@@ -146,6 +150,7 @@
 		DE0B1C181F16152700F6E93E /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				DE94981F1F56C5F900888758 /* Register */,
 				DE9EAB4F1F1F53F200627376 /* ResultPayment */,
 				DE0B1C251F161A1700F6E93E /* BaseClass */,
 				DE0B1C1F1F1615E800F6E93E /* GenerateQR */,
@@ -339,6 +344,31 @@
 			name = Network;
 			sourceTree = "<group>";
 		};
+		DE94981F1F56C5F900888758 /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				DE9498231F56CA0700888758 /* model */,
+				DE9498201F56C60A00888758 /* ViewController */,
+			);
+			name = Register;
+			sourceTree = "<group>";
+		};
+		DE9498201F56C60A00888758 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				DE9498211F56C62F00888758 /* RegisterViewController.swift */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		DE9498231F56CA0700888758 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				DE9498241F56CA1D00888758 /* RegisterResponse.swift */,
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
 		DE9EAB4F1F1F53F200627376 /* ResultPayment */ = {
 			isa = PBXGroup;
 			children = (
@@ -399,7 +429,7 @@
 				TargetAttributes = {
 					DE48E5391EA5C9DE008C5C84 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = WR6XBKQFZ2;
+						DevelopmentTeam = D4LYMDWCT6;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -490,8 +520,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE0259211EA9BB9000A2ED8B /* moneyFormatter.swift in Sources */,
+				DE9498221F56C62F00888758 /* RegisterViewController.swift in Sources */,
 				DE51AC7A1F18B06600CF58D4 /* SellerResponse.swift in Sources */,
 				DED175751EAF58ED00A49ECB /* ReceiveCashController.swift in Sources */,
+				DE9498251F56CA1D00888758 /* RegisterResponse.swift in Sources */,
 				DEA002481EADDB3B0004AAF1 /* WalkthroughPageViewController.swift in Sources */,
 				DE48E5401EA5C9DE008C5C84 /* MainController.swift in Sources */,
 				DED175771EAF6F1C00A49ECB /* GenerateQRCodeController.swift in Sources */,
@@ -632,11 +664,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = WR6XBKQFZ2;
+				DEVELOPMENT_TEAM = D4LYMDWCT6;
 				INFOPLIST_FILE = payment/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.zicure.payment.test;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zicure.CampusPayment;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
@@ -649,11 +681,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = WR6XBKQFZ2;
+				DEVELOPMENT_TEAM = D4LYMDWCT6;
 				INFOPLIST_FILE = payment/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.zicure.payment.test;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zicure.CampusPayment;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
