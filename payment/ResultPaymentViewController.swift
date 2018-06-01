@@ -55,19 +55,7 @@ class ResultPaymentViewController: BaseViewController {
         btnComplete.layer.borderColor = UIColor.lightGray.cgColor
         btnComplete.layer.borderWidth = 1
         
-        let balance = Double((information?.balance)!)
-        let amount = Double((information?.amount)!)
-
-        var resultCost = 0.00
-        
-        if isPay! {
-            resultCost = balance! - amount!
-        }else{
-            resultCost = balance! + amount!
-        }
-        
-        print(resultCost)
         costLabel.text = "บัตรเหลือ : \(moneyFormatter().thaiFormatter(Double(debitBalance!)!))"
-        balanceLabel.text = moneyFormatter().thaiFormatter(resultCost)
+        balanceLabel.text = information?.balance
     }
 }

@@ -26,7 +26,7 @@ class GenerateQRCodeViewController: UIViewController {
         super.viewDidLoad()
         title = "QR Code"
         balanceLabel.text = information?.balance
-        amountLabel.text = moneyFormatter().thaiFormatter(Double((information?.amount)!)!)
+        amountLabel.text = (information?.symbolLeft)! + moneyFormatter().thaiFormatter(Double((information?.amount)!)!) + (information?.symbolRight)!
         
         let qrcode = "\((information?.amount)!),\((information?.transactionRef)!)"
         let newImage:UIImage = generateQRCode(from: qrcode)!

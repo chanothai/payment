@@ -55,6 +55,24 @@ class ClientHttp {
         }
     }
     
+    
+    func requestRegister(parameter: [String: Any]) {
+        let path: String? = "\(url!)e-money-client/Registers"
+        guard let realUrl = URL(string: path!) else {
+            return
+        }
+        
+        Alamofire.request(realUrl, method: .post, parameters: parameter, encoding: JSONEncoding.default, headers: header).responseObject { (response: DataResponse<ResponseAccount>) in
+            
+            guard let registerResponse = response.result.value else {
+                print(response.error!)
+                return
+            }
+            
+            SwiftEventBus.post("RegisterAccountResponse", sender: registerResponse.result)
+        }
+    }
+    
     func requestToken(parameter: [String: String]) {
         let path: String? = "\(url!)\(PathURL.getToken)"
         print(path!)

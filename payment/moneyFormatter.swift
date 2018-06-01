@@ -16,6 +16,6 @@ class moneyFormatter {
         
         currencyFormatter.currencySymbol = ""
         let result = currencyFormatter.string(from: value as NSNumber)
-        return result! + " ฿"
+        return result!
     }
 }

@@ -124,6 +124,7 @@ extension ReceiveCashController {
         parameters["account_no"] = information.account
         parameters["amount"] = information.amount
         parameters["token"] = information.token
+        parameters["currency"] = information.currency
         
         showLoading()
         ClientHttp.getInstance().requestTranref(parameter: parameters)

@@ -24,6 +24,8 @@
 		DE812E121F171F89005A43BC /* ClientHttp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE812E111F171F89005A43BC /* ClientHttp.swift */; };
 		DE812E151F172C79005A43BC /* AccountResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE812E141F172C79005A43BC /* AccountResponse.swift */; };
 		DE812E171F174CD3005A43BC /* ProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE812E161F174CD3005A43BC /* ProfileResponse.swift */; };
+		DE90B2431F7A3B51003BBF08 /* AuthenStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE90B2421F7A3B51003BBF08 /* AuthenStore.swift */; };
+		DE90B2451F7A6119003BBF08 /* ResponseAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE90B2441F7A6119003BBF08 /* ResponseAccount.swift */; };
 		DE9498221F56C62F00888758 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9498211F56C62F00888758 /* RegisterViewController.swift */; };
 		DE9498251F56CA1D00888758 /* RegisterResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9498241F56CA1D00888758 /* RegisterResponse.swift */; };
 		DE9EAB521F1F542900627376 /* ResultPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9EAB511F1F542900627376 /* ResultPaymentViewController.swift */; };
@@ -59,6 +61,8 @@
 		DE812E111F171F89005A43BC /* ClientHttp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientHttp.swift; sourceTree = "<group>"; };
 		DE812E141F172C79005A43BC /* AccountResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountResponse.swift; sourceTree = "<group>"; };
 		DE812E161F174CD3005A43BC /* ProfileResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileResponse.swift; sourceTree = "<group>"; };
+		DE90B2421F7A3B51003BBF08 /* AuthenStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenStore.swift; sourceTree = "<group>"; };
+		DE90B2441F7A6119003BBF08 /* ResponseAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseAccount.swift; sourceTree = "<group>"; };
 		DE9498211F56C62F00888758 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		DE9498241F56CA1D00888758 /* RegisterResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterResponse.swift; sourceTree = "<group>"; };
 		DE9EAB511F1F542900627376 /* ResultPaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultPaymentViewController.swift; sourceTree = "<group>"; };
@@ -107,6 +111,7 @@
 				DE812E101F171F61005A43BC /* Network */,
 				DED175781EAF799400A49ECB /* ModelCart.swift */,
 				DE0259201EA9BB9000A2ED8B /* moneyFormatter.swift */,
+				DE90B2421F7A3B51003BBF08 /* AuthenStore.swift */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -365,6 +370,7 @@
 			isa = PBXGroup;
 			children = (
 				DE9498241F56CA1D00888758 /* RegisterResponse.swift */,
+				DE90B2441F7A6119003BBF08 /* ResponseAccount.swift */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -525,7 +531,9 @@
 				DED175751EAF58ED00A49ECB /* ReceiveCashController.swift in Sources */,
 				DE9498251F56CA1D00888758 /* RegisterResponse.swift in Sources */,
 				DEA002481EADDB3B0004AAF1 /* WalkthroughPageViewController.swift in Sources */,
+				DE90B2431F7A3B51003BBF08 /* AuthenStore.swift in Sources */,
 				DE48E5401EA5C9DE008C5C84 /* MainController.swift in Sources */,
+				DE90B2451F7A6119003BBF08 /* ResponseAccount.swift in Sources */,
 				DED175771EAF6F1C00A49ECB /* GenerateQRCodeController.swift in Sources */,
 				DE0B1C281F16210E00F6E93E /* BaseViewController.swift in Sources */,
 				DED175791EAF799400A49ECB /* ModelCart.swift in Sources */,

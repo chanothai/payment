@@ -16,6 +16,19 @@ class InformationUser {
     var _transactionRef:String?
     var _type:String?
     var _cardCode:String?
+    var _currency:String?
+    var _symbolLeft:String?
+    var _symbolRight: String?
+    
+    var currency: String {
+        get {
+            return _currency!
+        }
+        
+        set {
+            _currency = newValue
+        }
+    }
     
     var account:String {
         get {
@@ -77,6 +90,24 @@ class InformationUser {
         }
         set {
             _cardCode = newValue
+        }
+    }
+    
+    var symbolLeft: String {
+        get {
+            return _symbolLeft!
+        }
+        set {
+            _symbolLeft = newValue
+        }
+    }
+    
+    var symbolRight: String {
+        get {
+            return _symbolRight!
+        }
+        set {
+            _symbolRight = newValue
         }
     }
     

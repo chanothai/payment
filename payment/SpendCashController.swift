@@ -55,6 +55,7 @@ extension SpendCashController {
             parameter["amount"] = splitStr[0]
             parameter["token"] = information?.token
             parameter["transaction_ref"] = splitStr[1]
+            parameter["currency"] = information?.currency
             
             information?.amount = splitStr[0]
             
@@ -67,6 +68,7 @@ extension SpendCashController {
             parameters["amount"] = information?.amount
             parameters["token"] = information?.token
             parameters["transaction_ref"] = information?.transactionRef
+            parameters["currency"] = information?.currency
             
             showLoading()
             ClientHttp.getInstance().payCash(parameter: parameters)

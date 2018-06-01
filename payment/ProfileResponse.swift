@@ -26,6 +26,8 @@ class ProfileResult: Mappable {
     var balance: String?
     var customer: ProfileCustomer?
     var transaction: [ProfileTransaction]?
+    var symbolLeft: String?
+    var symbolRight: String?
     
     required init?(map: Map) {
         
@@ -37,6 +39,9 @@ class ProfileResult: Mappable {
         balance <- map["balance"]
         customer <- map["Customer"]
         transaction <- map["Transaction"]
+        symbolLeft <- map["symbol_left"]
+        symbolRight <- map["symbol_right"]
+        
     }
 }
 
@@ -76,6 +81,8 @@ class ProfileTransaction: Mappable {
     var phone: String?
     var img: String?
     var dateAgo: String?
+    var symbolLeft: String?
+    var symbolRight: String?
     
     required init?(map: Map) {
         
@@ -97,5 +104,7 @@ class ProfileTransaction: Mappable {
         phone <- map["telephone"]
         img <- map["image_path"]
         dateAgo <- map["date_ago"]
+        symbolLeft <- map["symbol_left"]
+        symbolRight <- map["symbol_right"]
     }
 }

@@ -21,16 +21,16 @@ class MainController: BaseViewController {
     var borderWidth:Float = 2.0
     let cash:Double? = nil
     var balance:String?
-    var accountFix = "201799990001030039"
+    var accountFix: String?
     var token: String?
     var spendController: SpendCashController?
+    var currency = "THB"
     
     var information:InformationUser!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setTableProperty()
-        
         //Remove the title of back button
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
@@ -75,7 +75,11 @@ class MainController: BaseViewController {
     }
     
     func setBalance() {
-        if let resultBalance = ModelCart.getInstance().getModel().profileresponse.balance {
+        let resultBalance = (ModelCart.getInstance().getModel().profileresponse.symbolLeft)! +
+            (ModelCart.getInstance().getModel().profileresponse.balance)! +
+            (ModelCart.getInstance().getModel().profileresponse.symbolRight)!
+        
+        if !resultBalance.isEmpty {
             balance = resultBalance
         }else{
             balance = "0.00"
@@ -84,9 +88,12 @@ class MainController: BaseViewController {
         balanceLabel.text = balance
         
         information = InformationUser()
-        information.balance = ModelCart.getInstance().getModel().profileresponse.balance!
-        information.account = accountFix
+        information.balance = balance!
+        information.account = accountFix!
+        information.currency = currency
         information.token = self.token!
+        information.symbolLeft = ModelCart.getInstance().getModel().profileresponse.symbolLeft!
+        information.symbolRight = ModelCart.getInstance().getModel().profileresponse.symbolRight!
     }
     
     func setImageProfile() {
@@ -147,6 +154,7 @@ extension MainController {
         var parameters = [String: String]()
         parameters["account_no"] = accountFix
         parameters["token"] = token
+        parameters["currency"] = currency
         
         ClientHttp.getInstance().requestProfile(parameter: parameters)
     }
@@ -189,12 +197,16 @@ extension MainController: UITableViewDelegate, UITableViewDataSource {
         
         let symbol = ModelCart.getInstance().getModel().profileresponse.transaction?[indexPath.row].symbol
         if symbol == "+" {
-            let credit = ModelCart.getInstance().getModel().profileresponse.transaction?[indexPath.row].credit
-            cell.amountDetailLabel.text = "\(symbol!) \(credit!)"
+            let credit = (ModelCart.getInstance().getModel().profileresponse.transaction?[indexPath.row].symbolLeft)!
+                +  (ModelCart.getInstance().getModel().profileresponse.transaction?[indexPath.row].credit)!
+                + (ModelCart.getInstance().getModel().profileresponse.transaction?[indexPath.row].symbolRight)!
+            cell.amountDetailLabel.text = "\(symbol!) \(credit)"
             cell.amountDetailLabel.textColor = UIColor.green
         }else{
-            let debit = ModelCart.getInstance().getModel().profileresponse.transaction?[indexPath.row].debit
-            cell.amountDetailLabel.text = "\(symbol!) \(debit!)"
+            let debit = (ModelCart.getInstance().getModel().profileresponse.transaction?[indexPath.row].symbolLeft)!
+                + (ModelCart.getInstance().getModel().profileresponse.transaction?[indexPath.row].debit)!
+                + (ModelCart.getInstance().getModel().profileresponse.transaction?[indexPath.row].symbolRight)!
+            cell.amountDetailLabel.text = "\(symbol!) \(debit)"
             cell.amountDetailLabel.textColor = UIColor.red
         }
         
